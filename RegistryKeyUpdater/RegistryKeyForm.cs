@@ -1,9 +1,11 @@
 ﻿using Microsoft.Win32;
+using RegistryKeyUpdater.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security;
 using System.Security.Permissions;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace RegistryKeyUpdater
@@ -70,6 +72,94 @@ namespace RegistryKeyUpdater
          {
             WriteLog($"Error occurrerd on key store searching : {ex.Message} Trace : {ex.StackTrace}"); WriteLog($"Error occurrerd on key store searching : {ex.Message} Trace : {ex.StackTrace}");
          }
+      }
+
+      /// <summary>
+      /// Handles the Click event of the btnCreate control.
+      /// </summary>
+      /// <param name="sender">The source of the event.</param>
+      /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+      private void btnCreate_Click(object sender, EventArgs e)
+      {
+         try
+         {
+            List<RegistryEntry> keysToWrite = GetKeysList();
+
+            if (keysToWrite.Count > 0)
+            {
+               string log = string.Empty;
+
+               foreach (var item in keysToWrite)
+               {
+                  log += $"These entries will add to the destination Key : {item.Key} Value : {item.Value} Data Type : {item.DataType}\n";
+               }
+
+               WriteLog(log);
+            }
+            else
+            {
+               WriteLog($"Unable to find keys to input.");
+            }
+         }
+         catch (Exception ex)
+         {
+            WriteLog($"Error occurrerd on btnCreate_Click : {ex.Message} Trace : {ex.StackTrace}");
+         }
+      }
+
+      private List<RegistryEntry> GetKeysList()
+      {
+         List<RegistryEntry> items = new List<RegistryEntry>();
+         string[] mainItems = txtKeyValuePair.Text.Split(';');
+
+         try
+         {
+            if (mainItems != null && mainItems.Length > 0)
+            {
+               foreach (string item in mainItems)
+               {
+                  string[] filteredItems = item.Split(':');
+
+                  if (filteredItems.Length > 0)
+                  {
+                     string[] keyValueItems = filteredItems[0].Split('=');
+
+                     if (keyValueItems.Length > 0)
+                     {
+                        items.Add(new RegistryEntry() { Key = keyValueItems[0], Value = keyValueItems[1], DataType = filteredItems[1] });
+                     }
+                     else
+                     {
+                        WriteLog($"Not a qualified pattern : {filteredItems[0]} qualifier -> '='");
+                     }
+                  }
+                  else
+                  {
+                     WriteLog($"Not a qualified pattern : {item} qualifier -> ':'");
+                  }
+               }
+            }
+            else
+            {
+               WriteLog($"Unable to find qualified registry entries to add. Please provide keys in correct format.");
+            }
+         }
+         catch (Exception ex)
+         {
+            WriteLog($"Error occurrerd on GetKeysList : {ex.Message} Trace : {ex.StackTrace}");
+         }
+
+         return items;
+      }
+
+      /// <summary>
+      /// Handles the Click event of the btnReset control.
+      /// </summary>
+      /// <param name="sender">The source of the event.</param>
+      /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+      private void btnReset_Click(object sender, EventArgs e)
+      {
+         ClearControls();
       }
 
       #region Private Methods
@@ -153,22 +243,5 @@ namespace RegistryKeyUpdater
       }
 
       #endregion Private Methods
-
-      private void btnCreate_Click(object sender, EventArgs e)
-      {
-         try
-         {
-            WriteLog("Not yet implemented");
-         }
-         catch (Exception)
-         {
-            throw;
-         }
-      }
-
-      private void btnReset_Click(object sender, EventArgs e)
-      {
-         ClearControls();
-      }
    }
 }
