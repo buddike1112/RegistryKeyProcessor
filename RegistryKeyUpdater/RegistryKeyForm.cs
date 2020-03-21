@@ -153,5 +153,22 @@ namespace RegistryKeyUpdater
       }
 
       #endregion Private Methods
+
+      private void btnCreate_Click(object sender, EventArgs e)
+      {
+         try
+         {
+            WriteLog("Not yet implemented");
+         }
+         catch (Exception)
+         {
+            throw;
+         }
+      }
+
+      private void btnReset_Click(object sender, EventArgs e)
+      {
+         ClearControls();
+      }
    }
 }

@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\RegistryEntry.cs" />
     <Compile Include="RegistryKeyForm.cs">
       <SubType>Form</SubType>
     </Compile>

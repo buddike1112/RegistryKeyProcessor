@@ -39,6 +39,10 @@
          this.tabArea = new System.Windows.Forms.TabControl();
          this.tabCreate = new System.Windows.Forms.TabPage();
          this.tabMoveKeys = new System.Windows.Forms.TabPage();
+         this.txtStorePath = new System.Windows.Forms.TextBox();
+         this.lblStorePath = new System.Windows.Forms.Label();
+         this.btnCreate = new System.Windows.Forms.Button();
+         this.btnReset = new System.Windows.Forms.Button();
          this.tabArea.SuspendLayout();
          this.tabCreate.SuspendLayout();
          this.SuspendLayout();
@@ -75,13 +79,13 @@
          this.lstKeys.FormattingEnabled = true;
          this.lstKeys.Location = new System.Drawing.Point(14, 84);
          this.lstKeys.Name = "lstKeys";
-         this.lstKeys.Size = new System.Drawing.Size(746, 329);
+         this.lstKeys.Size = new System.Drawing.Size(746, 303);
          this.lstKeys.TabIndex = 3;
          // 
          // lblKeyValuePair
          // 
          this.lblKeyValuePair.AutoSize = true;
-         this.lblKeyValuePair.Location = new System.Drawing.Point(10, 430);
+         this.lblKeyValuePair.Location = new System.Drawing.Point(10, 407);
          this.lblKeyValuePair.Name = "lblKeyValuePair";
          this.lblKeyValuePair.Size = new System.Drawing.Size(329, 13);
          this.lblKeyValuePair.TabIndex = 4;
@@ -89,7 +93,7 @@
          // 
          // txtKeyValuePair
          // 
-         this.txtKeyValuePair.Location = new System.Drawing.Point(14, 466);
+         this.txtKeyValuePair.Location = new System.Drawing.Point(14, 430);
          this.txtKeyValuePair.Name = "txtKeyValuePair";
          this.txtKeyValuePair.Size = new System.Drawing.Size(726, 20);
          this.txtKeyValuePair.TabIndex = 5;
@@ -97,7 +101,7 @@
          // lblResult
          // 
          this.lblResult.AutoSize = true;
-         this.lblResult.Location = new System.Drawing.Point(11, 502);
+         this.lblResult.Location = new System.Drawing.Point(11, 559);
          this.lblResult.Name = "lblResult";
          this.lblResult.Size = new System.Drawing.Size(37, 13);
          this.lblResult.TabIndex = 6;
@@ -105,7 +109,7 @@
          // 
          // txtResult
          // 
-         this.txtResult.Location = new System.Drawing.Point(14, 533);
+         this.txtResult.Location = new System.Drawing.Point(14, 587);
          this.txtResult.Multiline = true;
          this.txtResult.Name = "txtResult";
          this.txtResult.ReadOnly = true;
@@ -124,6 +128,10 @@
          // 
          // tabCreate
          // 
+         this.tabCreate.Controls.Add(this.btnReset);
+         this.tabCreate.Controls.Add(this.btnCreate);
+         this.tabCreate.Controls.Add(this.lblStorePath);
+         this.tabCreate.Controls.Add(this.txtStorePath);
          this.tabCreate.Controls.Add(this.cmbKeyStores);
          this.tabCreate.Controls.Add(this.txtResult);
          this.tabCreate.Controls.Add(this.lblKeyStores);
@@ -149,6 +157,42 @@
          this.tabMoveKeys.TabIndex = 1;
          this.tabMoveKeys.Text = "Move Keys";
          this.tabMoveKeys.UseVisualStyleBackColor = true;
+         // 
+         // txtStorePath
+         // 
+         this.txtStorePath.Location = new System.Drawing.Point(14, 487);
+         this.txtStorePath.Name = "txtStorePath";
+         this.txtStorePath.Size = new System.Drawing.Size(726, 20);
+         this.txtStorePath.TabIndex = 8;
+         // 
+         // lblStorePath
+         // 
+         this.lblStorePath.AutoSize = true;
+         this.lblStorePath.Location = new System.Drawing.Point(13, 462);
+         this.lblStorePath.Name = "lblStorePath";
+         this.lblStorePath.Size = new System.Drawing.Size(362, 13);
+         this.lblStorePath.TabIndex = 9;
+         this.lblStorePath.Text = "Store Path (Ex : HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node)";
+         // 
+         // btnCreate
+         // 
+         this.btnCreate.Location = new System.Drawing.Point(502, 527);
+         this.btnCreate.Name = "btnCreate";
+         this.btnCreate.Size = new System.Drawing.Size(75, 23);
+         this.btnCreate.TabIndex = 10;
+         this.btnCreate.Text = "Create";
+         this.btnCreate.UseVisualStyleBackColor = true;
+         this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
+         // 
+         // btnReset
+         // 
+         this.btnReset.Location = new System.Drawing.Point(589, 526);
+         this.btnReset.Name = "btnReset";
+         this.btnReset.Size = new System.Drawing.Size(75, 23);
+         this.btnReset.TabIndex = 11;
+         this.btnReset.Text = "Reset";
+         this.btnReset.UseVisualStyleBackColor = true;
+         this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
          // 
          // frmRegistryKeyUpdater
          // 
@@ -179,6 +223,10 @@
       private System.Windows.Forms.TabControl tabArea;
       private System.Windows.Forms.TabPage tabCreate;
       private System.Windows.Forms.TabPage tabMoveKeys;
+      private System.Windows.Forms.Button btnCreate;
+      private System.Windows.Forms.Label lblStorePath;
+      private System.Windows.Forms.TextBox txtStorePath;
+      private System.Windows.Forms.Button btnReset;
    }
 }
 
